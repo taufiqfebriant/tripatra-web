@@ -11,6 +11,10 @@
 - [GraphQL Request](https://github.com/jasonkuhrt/graphql-request)
 - [Tanstack Query](https://tanstack.com/query/latest)
 
+## Prerequisites
+
+- Node.js (v18.18 or higher)
+
 ## Setup and Run
 
 1. Clone the repository
