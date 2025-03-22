@@ -1,0 +1,83 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+directive @auth on FIELD_DEFINITION | OBJECT
+
+"""
+Directs the executor to defer this fragment when the `if` argument is true or undefined.
+"""
+directive @defer(
+  """Deferred when true or undefined."""
+  if: Boolean = true
+  """Unique name"""
+  label: String
+) on FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+type AuthResponse {
+  accessToken: String!
+  user: User!
+}
+
+input CreateProductInput {
+  name: String!
+  price: Float!
+  stock: Int!
+}
+
+input CreateUserInput {
+  email: String!
+  name: String!
+  password: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  createProduct(input: CreateProductInput!): Product!
+  createUser(input: CreateUserInput!): User!
+  deleteProduct(id: ID!): Boolean!
+  deleteUser(id: ID!): Boolean!
+  login(input: LoginInput!): AuthResponse!
+  updateProduct(id: ID!, input: UpdateProductInput!): Product!
+  updateUser(id: ID!, input: UpdateUserInput!): User!
+}
+
+type Product {
+  createdAt: String!
+  id: ID!
+  name: String!
+  price: Float!
+  stock: Int!
+  updatedAt: String!
+}
+
+type Query {
+  me: User!
+  product(id: ID!): Product
+  products: [Product!]!
+  user(id: ID!): User
+  users: [User!]!
+}
+
+input UpdateProductInput {
+  name: String
+  price: Float
+  stock: Int
+}
+
+input UpdateUserInput {
+  email: String
+  name: String
+  password: String
+}
+
+type User {
+  email: String!
+  id: ID!
+  name: String!
+}
